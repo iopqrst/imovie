@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var MovieSchema = new Schema({
 	doctor: String,
-	titile: String,
+	title: String,
 	language: String,
 	country: String,
 	summary: String,
