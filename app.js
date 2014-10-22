@@ -34,15 +34,15 @@ app.get('/', function(req, res) {
 app.get('/movie/:id', function(req, res) {
 	var id = req.params.id;
 
-	MovieModel.findById(id, function(err, movies) {
+	MovieModel.findById(id, function(err, movie) {
 
 		if (err) {
 			console.error(err);
 		}
 
 		res.render('detail', {
-			movie: movies[0],
-			title: movies[0].title || '电影详情页面'
+			movie: movie,
+			title: movie.title || '电影详情页面'
 		});
 
 	});
@@ -68,10 +68,10 @@ app.get('/admin/update/:id', function(req, res) {
 	var id = req.params.id;
 
 	if (id) {
-		MovieModel.findById(id, function(err, movies) {
+		MovieModel.findById(id, function(err, movie) {
 			res.render('admin', {
-				title: movies[0].title || 'imooc 后台更新页面',
-				movie: movies[0]
+				title: movie.title || 'imooc 后台更新页面',
+				movie: movie
 			});
 		});
 	}
@@ -91,13 +91,21 @@ app.post('/admin/movie/new', function(req, res) {
 			}
 
 			_movie = _.extend(movie, movieObj);
-			delete _movie._id; //删除id
-			MovieModel.update({_id: id}, _movie, function(err, cb){
-				if (err) {
+//			delete _movie._id; //删除id
+//			MovieModel.update({_id: id}, _movie, function(err, cb){
+//				if (err) {
+//					console.log(err);
+//				}
+//
+//				res.redirect('/movie/' + id);				
+//			});
+
+			_movie.save(function(err){
+				if(err) {
 					console.log(err);
 				}
-
-				res.redirect('/movie/' + id);				
+				
+				res.redirect('/movie/' + _movie.id);
 			});
 		});
 		
