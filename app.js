@@ -85,6 +85,12 @@ app.post('/admin/movie/new', function(req, res) {
 	var _movie;
 
 	if (id !== 'undefined') {
+		
+		/**
+		 * 这部分需要改为save
+		 */
+		
+		
 		MovieModel.findById(id, function(err, movie) {
 			if (err) {
 				console.log(err);
