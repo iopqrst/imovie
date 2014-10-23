@@ -11,7 +11,7 @@ app.use(require('body-parser').urlencoded({
 	extended: true
 }));
 
-app.use(express.static(path.join(__dirname, 'bower_components')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('port', process.env.port || 3000);
 app.set('views', './views/pages');
@@ -159,6 +159,19 @@ app.get('/admin/movie/del/:id', function(req, res) {
 		}
 		
 		res.redirect('/admin/movie/list');
+	});
+});
+
+app.delete('/admin/movie/del2/:id', function(req, res) {
+	var id = req.params.id;
+	console.log(id);
+	MovieModel.remove({_id : id}, function(err){
+		
+		if(err) {
+			console.info(err);
+		}
+		
+		res.json({succ:1});
 	});
 });
 

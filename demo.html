@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./public/libs/jquery/dist/jquery.min.js"></script>
+		
+		<script type="text/javascript">
+			$(function(){
+				$(".item-tr").on("click",function(){
+					alert($(this).data("id"));
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<table border="" cellspacing="" cellpadding="">
+			<tr class="item-tr" data-id="1"><td>Data</td></tr>
+			<tr class="item-tr" data-id="2"><td>Data</td></tr>
+			<tr class="item-tr" data-id="3"><td>Data</td></tr>
+			<tr class="item-tr" data-id="4"><td>Data</td></tr>
+		</table>
+	</body>
+</html>
