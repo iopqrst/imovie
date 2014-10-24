@@ -5,6 +5,8 @@ var mongoose = require('mongoose');
 var MovieModel = require('./models/movieModel');
 var _ = require('underscore');
 
+//var bcrypt = require('bcrypt');
+
 mongoose.connect('mongodb://localhost/imooc');
 
 app.use(require('body-parser').urlencoded({
@@ -20,6 +22,9 @@ app.set('view engine', 'jade');
 app.locals.moment = require('moment');
 
 app.get('/', function(req, res) {
+	
+//	console.info(bcrypt);
+	
 	MovieModel.fetch(function(err, movies) {
 		if (err) {
 			console.log(err)
