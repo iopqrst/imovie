@@ -1,8 +1,3 @@
-imovie
-======
-fixed !!!
-
-
-just test!!
+慕课网的node教学部分代码，自己整的
 
 
