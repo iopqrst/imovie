@@ -17,7 +17,7 @@ app.use(require('body-parser').urlencoded({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('port', process.env.port || 3000);
-app.set('views', './views/pages');
+app.set('views', './app/views/pages');
 app.set('view engine', 'jade');
 app.use(cookieParser());
 app.use(session({

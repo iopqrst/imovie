@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 					args: [],
 					ignore: ['README.md', 'node_modules/**', 'DS_Store'],
 					ext: 'js',
-					watch: ['./'],
+					watch: ['app'],
 					nodeArgs: ['--debug'],
 					delay: 1000,
 					env: {
