@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			table.table.table-hover.table-bordered
+				thead
+					tr
+						th 用户名
+						th 创建时间
+						th 更新时间
+						th 操作
+					tbody
+						each item in users
+							tr(class="item-id-#{item._id}")
+								td
+									a(target="_blank",href="/movie/#{item._id}") #{item.name} &nbsp;
+								td #{moment(item.meta.createAt).format('YYYY-MM-DD')}
+								td #{moment(item.meta.updateAt).format('YYYY-MM-DD')}
+								td 
+									a(target="_blank",href="/admin/update/#{item._id}") 修改&nbsp;
+									button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除

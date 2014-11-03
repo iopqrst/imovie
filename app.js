@@ -27,17 +27,17 @@ app.use(session({
 	saveUninitialized: false,
 	store: new mongoStore({
 		url: dbUrl,
-		auto_reconnect: true,//issue 推荐解决方法
+		auto_reconnect: true, //issue 推荐解决方法
 		collection: "sessions"
 	})
 }));
 app.locals.moment = require('moment');
 
-if("development" === app.get("env")){
-	app.set("showStackError",true);
+if ("development" === app.get("env")) {
+	app.set("showStackError", true);
 	app.use(logger(":method :url :status"));
 	app.locals.pretty = false;
-	mongoose.set("debug",true);
+	mongoose.set("debug", true);
 }
 
 require('./config/router')(app);
