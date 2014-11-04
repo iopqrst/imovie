@@ -81,10 +81,38 @@ exports.queryUserList = function(req, res) {
 		if (err) {
 			throw err;
 		}
-
+		
 		res.render('userlist', {
 			title: '用户列表',
 			users: users
 		});
 	});
+};
+
+/**
+ * 验证用户是否登陆
+ */
+exports.validUser = function(req, res, next) {
+	var _user = req.session.session_of_user;
+	console.log('----------validUser');
+	if(!_user) {
+		res.redirect('/signin');
+		return;
+	}
+	
+	next();
+};
+
+/**
+ * 验证用户
+ */
+exports.validUserRole = function(req, res, next) {
+	var _user = req.session.session_of_user;
+	console.log('----------validUserRole');
+	if(_user.role && _user.role > 10) {
+		next();
+	} else {
+		console.log('-----登录用户没有权限操作');
+		return res.redirect('/signin');
+	}
 };

@@ -16,19 +16,19 @@ module.exports = function(app) {
 	});
 
 	app.get('/', index); //welcome
-
 	app.get('/movie/:id', movie.detail); //详情页
-	app.get('/admin/movie', movie.toAdd); //跳转到添加页
-	app.get('/admin/update/:id', movie.toModify);// 跳转到修改页
+	
+	app.get('/admin/movie', [user.validUser], movie.toAdd); //跳转到添加页
+	app.get('/admin/update/:id', [user.validUser], movie.toModify);// 跳转到修改页
 
 	// admin post movie
-	app.post('/admin/movie/new', movie.saveOrUpdate);
-	app.get('/admin/movie/list', movie.queryListForAdmin);
-	app.get('/admin/movie/del/:id', movie.del);
-	app.delete('/admin/movie/del2/:id', movie.del2);
+	app.post('/admin/movie/new', [user.validUser], movie.saveOrUpdate);
+	app.get('/admin/movie/list', [user.validUser], movie.queryListForAdmin);
+	app.get('/admin/movie/del/:id', [user.validUser], movie.del);
+	app.delete('/admin/movie/del2/:id', [user.validUser], movie.del2);
 
 	// user
-	app.get('/user/list', user.queryUserList);
+	app.get('/user/list', [user.validUser, user.validUserRole], user.queryUserList);
 	app.post('/user/signin', user.signin); //登录
 	app.get('/user/logout', function(req, res) {
 		delete req.session.session_of_user;
