@@ -1,9 +1,19 @@
 var UserModel = require('../models/userModel');
+//跳转到登录页面
+exports.showSignIn = function(req, res) {
+	res.render('signin',{
+		title : '登录页面'
+	});
+};
+//跳转到注册页面
+exports.showSignUp = function(req, res) {
+	res.render('signup',{
+		title : '注册页面'
+	});
+};
 
 exports.signin = function(req, res) {
 	var _user = req.body.user;
-
-	console.info(_user);
 
 	UserModel.findOne({ name: _user.name }, function(err, user) {
 		if (err) {
@@ -26,14 +36,15 @@ exports.signin = function(req, res) {
 				return res.redirect('/');
 			});
 		} else {
-			return res.redirect('/');
+			return res.redirect('/signup');
 		}
 	});
 };
 //登录
 exports.logout = function(req, res) {
 	delete req.session.session_of_user;
-	delete app.locals.user;
+	//TODO 直接调用这个方法会在这一行出现问题 app is not defined
+	delete app.locals.user; 
 	res.redirect('/');
 };
 
@@ -46,8 +57,8 @@ exports.signup = function(req, res) {
 			console.info(err);
 		}
 
-		if (!user) {
-			return res.redirect('/');
+		if (user) {//存在跳转到登录页面
+			return res.redirect('/signin');
 		} else {
 			var userEntity = new UserModel({
 				name: _user.name,

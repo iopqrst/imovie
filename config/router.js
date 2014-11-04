@@ -30,6 +30,13 @@ module.exports = function(app) {
 	// user
 	app.get('/user/list', user.queryUserList);
 	app.post('/user/signin', user.signin); //登录
-	app.get('/user/logout', user.logout);  //登出
+	app.get('/user/logout', function(req, res) {
+		delete req.session.session_of_user;
+		delete app.locals.user; 
+		res.redirect('/');
+	});  //登出
 	app.post('/user/signup', user.signup); //注册
+	
+	app.get('/signin', user.showSignIn);
+	app.get('/signup', user.showSignUp);
 };
