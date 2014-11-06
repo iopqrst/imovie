@@ -1,4 +1,5 @@
 var MovieModel = require('../models/movieModel');
+var CommentModel = require('../models/commentModel');
 var _ = require('underscore');
 
 exports.detail = function(req, res) {
@@ -9,10 +10,19 @@ exports.detail = function(req, res) {
 		if (err) {
 			console.error(err);
 		}
-
-		res.render('detail', {
-			movie: movie,
-			title: movie.title || '电影详情页面'
+		
+		CommentModel
+			.find({movie:id})
+			.populate('from','name')
+			.populate('reply.to reply.from', 'name')
+			.exec(function(err, comments){
+				console.log(comments);
+				
+				res.render('detail', {
+					movie: movie,
+					title: movie.title || '电影详情页面',
+					comments: comments
+				});
 		});
 
 	});

@@ -5,6 +5,11 @@ var ObjectId = Schema.Types.ObjectId;
 var CommentSchema = new Schema({
 	movie: {type:ObjectId, ref:'Movie'},
 	from : {type:ObjectId, ref:'User'},
+	reply: [{
+		from : {type:ObjectId, ref:'User'},
+		to :  {type:ObjectId, ref:'User'},
+		content : String
+	}],
 	content: String,
 	meta: {
 		createAt: {
@@ -24,6 +29,7 @@ CommentSchema.pre('save', function(next) {
 	} else {
 		this.meta.updateAt = Date.now();
 	}
+	next();
 });
 
 CommentSchema.statics = {

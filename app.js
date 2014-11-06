@@ -36,7 +36,7 @@ app.locals.moment = require('moment');
 if ("development" === app.get("env")) {
 	app.set("showStackError", true);
 	app.use(logger(":method :url :status"));
-	app.locals.pretty = false;
+	app.locals.pretty = true; //控制是否压缩生成的html页面
 	mongoose.set("debug", true);
 }
 
