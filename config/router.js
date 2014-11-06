@@ -1,6 +1,7 @@
 var index = require('../app/controllers/index');
 var movie = require('../app/controllers/movie');
 var user = require('../app/controllers/user');
+var comm = require('../app/controllers/comment');
 
 module.exports = function(app) {
 	app.use(function(req, res, next) {
@@ -36,6 +37,8 @@ module.exports = function(app) {
 		res.redirect('/');
 	});  //登出
 	app.post('/user/signup', user.signup); //注册
+	
+	app.post('/user/comment', comm.saveComment); //添加评论
 	
 	app.get('/signin', user.showSignIn);
 	app.get('/signup', user.showSignUp);
