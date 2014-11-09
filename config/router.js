@@ -39,7 +39,7 @@ module.exports = function(app) {
 	});  //登出
 	app.post('/user/signup', user.signup); //注册
 	
-	app.post('/user/comment', comm.saveComment); //添加评论
+	app.post('/user/comment', [user.validUser], comm.saveComment); //添加评论
 	
 	//评论
 	app.get('/admin/category', user.validUser, category.toAdd);
