@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			div.text-right
+				a(target="_blank",href="/admin/category") 添加
+			table.table.table-hover.table-bordered
+				thead
+					tr
+						th 类别
+						th 创建时间
+						th 更新时间
+						th 操作
+					tbody
+						each cat in categories
+							tr(class="item-id-#{cat._id}")
+								td
+									a(target="_blank",href="/category/#{cat._id}") #{cat.name} &nbsp;
+								td #{moment(cat.meta.createAt).format('YYYY-MM-DD HH:mm:ss')}
+								td #{moment(cat.meta.updateAt).format('YYYY-MM-DD HH:mm:ss')}
+								td 
+									button.btn-success 删除和修改页没意思

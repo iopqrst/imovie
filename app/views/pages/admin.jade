@@ -3,12 +3,24 @@ extends ../layout
 block content
 	.container
 		.row
-			form.form-horizotal(method="post",action="/admin/movie/new")
+			form.form-horizotal(method="post",action="/admin/movie/new",enctype="multipart/form-data")
 				input(type="hidden",name="movie[_id]",value="#{movie._id}")
 				.form-group
 					lable.col-sm-2.control-lable(for="inputTitle") 电影名字
 					.col-sm-10
 						input#inputTitle.form-control(type="text",name="movie[title]",value="#{movie.title}")
+				.form-group
+					lable.col-sm-2.control-lable(for="inputTitle") 电影类别
+					.col-sm-10
+						select.form-control(name="movie[category]")
+							each cat in categories
+								if movie._id
+									if cat._id.toString() == movie.category.toString()
+										option(value="#{cat._id}",selected="selected") #{cat.name}
+									else 
+										option(value="#{cat._id}") #{cat.name}
+								else
+									option(value="#{cat._id}") #{cat.name}
 				.form-group
 					lable.col-sm-2.control-lable(for="inputDoctor") 电影导演
 					.col-sm-10
@@ -25,6 +37,10 @@ block content
 					lable.col-sm-2.control-lable(for="inputPoster") 海报地址
 					.col-sm-10
 						input#inputPoster.form-control(type="text",name="movie[poster]",value="#{movie.poster}")
+				.form-group
+					lable.col-sm-2.control-lable(for="inputPoster") 上传海报
+					.col-sm-10
+						input#inputUploadPoster(type="file",name="uploadPoster",value="")
 				.form-group
 					lable.col-sm-2.control-lable(for="inputFlash") 片源地址
 					.col-sm-10

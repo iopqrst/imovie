@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var multiparty = require('connect-multiparty');
 var mongoStore = require('connect-mongo')(session);
 var logger = require('morgan');
 var dbUrl = 'mongodb://localhost/imooc';
@@ -20,6 +21,7 @@ app.set('port', process.env.port || 3000);
 app.set('views', './app/views/pages');
 app.set('view engine', 'jade');
 app.use(cookieParser());
+app.use(multiparty());
 app.use(session({
 	name: "opqrst",
 	secret: "imovie",

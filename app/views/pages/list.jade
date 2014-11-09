@@ -26,4 +26,14 @@ block content
 								td 
 									a(target="_blank",href="/admin/update/#{item._id}") 修改&nbsp;
 									button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+			ul.pagination
+				- for(var i = 0; i < totalPage ; i++) {
+					-if((i + 1) == currentPage) {
+						li.active
+							span #{currentPage}
+					-} else {
+						li 
+							a(href="/admin/movie/list?p=#{i}") #{i+1}
+					-}
+				- }
 	script(src="/js/imovie.js")
