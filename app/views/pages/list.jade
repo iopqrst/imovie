@@ -11,6 +11,7 @@ block content
 						th 电影名字
 						th 导演
 						th 国家
+						th pv
 						th 上映年份
 						th 更新时间
 						th 操作
@@ -21,6 +22,7 @@ block content
 									a(target="_blank",href="/movie/#{item._id}") #{item.title} &nbsp;
 								td #{item.doctor}
 								td #{item.country}
+								td #{item.pv}
 								td #{item.year}
 								td #{moment(item.meta.updateAt).format('YYYY-MM-DD')}
 								td 

@@ -43,6 +43,13 @@ exports.detail = function(req, res) {
 		if (err) {
 			console.error(err);
 		}
+		
+		//访问统计
+		MovieModel.update({_id:id},{$inc:{pv:1}}, function(err){
+			if(err) {
+				console.info(err);
+			}
+		});
 
 		CommentModel
 			.find({
