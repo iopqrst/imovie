@@ -5,6 +5,10 @@ var comm = require('../app/controllers/comment');
 var category = require('../app/controllers/category');
 
 module.exports = function(app) {
+	
+	/**
+	 * use 的用法相当于java 的 filter
+	 */
 	app.use(function(req, res, next) {
 
 		console.info('-----session user :');
@@ -14,7 +18,17 @@ module.exports = function(app) {
 		if (_user) {
 			app.locals.user = _user;
 		}
+		next(); 
+	});
+	
+	app.use(function(req, res, next) {
+		
+		console.info('hey, there ... ');
+		//执行完上面的use 会执行这部分代码
 		next();
+		
+		// use中不调用next程序就无法向下进行 (我自己理解的)
+		
 	});
 
 	app.get('/', index.index); //welcome
