@@ -5,21 +5,20 @@ var mongoose = require('mongoose');
 
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
-var multiparty = require('connect-multiparty');
+var multiparty = require('connect-multiparty'); //上传文件
 var mongoStore = require('connect-mongo')(session);
 var logger = require('morgan');
 var dbUrl = 'mongodb://localhost/imooc';
 mongoose.connect(dbUrl);
 
-app.use(require('body-parser').urlencoded({
-	extended: true
-}));
-
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.set('port', process.env.port || 3000);
 app.set('views', './app/views/pages');
 app.set('view engine', 'jade');
+
+app.use(require('body-parser').urlencoded({
+	extended: true
+}));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(multiparty());
 app.use(session({
@@ -33,6 +32,7 @@ app.use(session({
 		collection: "sessions"
 	})
 }));
+
 app.locals.moment = require('moment');
 
 if ("development" === app.get("env")) {
